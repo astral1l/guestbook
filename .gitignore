@@ -1,0 +1,7 @@
+/config.php
+/storage/*.sqlite
+/storage/*.sqlite-*
+/tz.txt
+/*.pdf
+.idea/
+.DS_Store
