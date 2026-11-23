@@ -34,3 +34,5 @@ if (PHP_SAPI !== 'cli') {
 
 require __DIR__ . '/helpers.php';
 require __DIR__ . '/db.php';
+require __DIR__ . '/router.php';
+require __DIR__ . '/messages.php';

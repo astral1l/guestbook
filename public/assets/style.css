@@ -71,3 +71,44 @@ h2 {
     border-color: var(--error);
     color: var(--error);
 }
+
+.messages {
+    margin: 0;
+    padding: 0;
+    border-top: 1px solid var(--line);
+    list-style: none;
+}
+
+.message {
+    padding: 18px 0;
+    border-bottom: 1px solid var(--line);
+}
+
+.meta {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 6px;
+    font-size: 14px;
+}
+
+.meta time {
+    color: var(--muted);
+    white-space: nowrap;
+}
+
+.text {
+    margin: 0;
+    overflow-wrap: anywhere;
+}
+
+.pager {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+.pager span {
+    color: var(--muted);
+}
