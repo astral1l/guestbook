@@ -26,3 +26,43 @@ function all_messages(int $page): array
 
     return $stmt->fetchAll();
 }
+
+function validate_message(array $input): array
+{
+    $data = [
+        'name' => trim(is_string($input['name'] ?? null) ? $input['name'] : ''),
+        'email' => is_string($input['email'] ?? null) ? $input['email'] : '',
+        'body' => trim(is_string($input['body'] ?? null) ? $input['body'] : ''),
+    ];
+
+    $errors = [];
+
+    if ($data['name'] === '') {
+        $errors['name'] = 'Enter your name.';
+    } elseif (strlen($data['name']) < 2 || strlen($data['name']) > 50) {
+        $errors['name'] = 'Name must be 2 to 50 characters.';
+    }
+
+    if ($data['email'] !== '' && filter_var($data['email'], FILTER_VALIDATE_EMAIL) === false) {
+        $errors['email'] = 'Enter a valid email address.';
+    }
+
+    if ($data['body'] === '') {
+        $errors['body'] = 'Enter your message.';
+    } elseif (strlen($data['body']) < 3 || strlen($data['body']) > 1000) {
+        $errors['body'] = 'Message must be 3 to 1000 characters.';
+    }
+
+    return [$data, $errors];
+}
+
+function create_message(array $data): void
+{
+    $stmt = db()->prepare('INSERT INTO messages (name, email, body, created_at) VALUES (?, ?, ?, ?)');
+    $stmt->execute([
+        $data['name'],
+        $data['email'] !== '' ? $data['email'] : null,
+        $data['body'],
+        date('Y-m-d H:i:s'),
+    ]);
+}

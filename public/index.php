@@ -20,7 +20,30 @@ route('GET', '/', function () {
         'messages' => all_messages($page),
         'page' => $page,
         'pages' => $pages,
+        'errors' => [],
+        'old' => ['name' => '', 'email' => '', 'body' => ''],
     ]);
+});
+
+route('POST', '/messages', function () {
+    [$data, $errors] = validate_message($_POST);
+
+    if ($errors) {
+        render('home', [
+            'title' => 'Guestbook',
+            'messages' => all_messages(1),
+            'page' => 1,
+            'pages' => page_count(count_messages()),
+            'errors' => $errors,
+            'old' => $data,
+        ]);
+
+        return;
+    }
+
+    create_message($data);
+    flash('Thanks, your message has been added.');
+    redirect('/');
 });
 
 $method = $_SERVER['REQUEST_METHOD'];
