@@ -163,3 +163,36 @@ button {
     font: inherit;
     cursor: pointer;
 }
+
+.top nav {
+    display: flex;
+    gap: 16px;
+    font-size: 14px;
+}
+
+.admin-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+
+.admin-head h1 {
+    margin: 0;
+}
+
+.delete-form {
+    margin-top: 8px;
+}
+
+button.delete {
+    padding: 4px 10px;
+    border-color: var(--line);
+    background: transparent;
+    color: var(--error);
+    font-size: 13px;
+}
+
+.login {
+    max-width: 360px;
+}

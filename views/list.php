@@ -10,6 +10,12 @@
                     <time datetime="<?= e(date('c', $created)) ?>"><?= e(date('M j, Y H:i', $created)) ?></time>
                 </div>
                 <p class="text"><?= nl2br(e($message['body']), false) ?></p>
+
+                <?php if (!empty($admin)): ?>
+                    <form method="post" action="/admin/messages/<?= (int) $message['id'] ?>/delete" class="delete-form">
+                        <button type="submit" class="delete">Delete</button>
+                    </form>
+                <?php endif; ?>
             </li>
         <?php endforeach; ?>
     </ul>

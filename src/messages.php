@@ -73,3 +73,9 @@ function create_message(array $data): void
         date('Y-m-d H:i:s'),
     ]);
 }
+
+function delete_message(int $id): void
+{
+    $stmt = db()->prepare('DELETE FROM messages WHERE id = ?');
+    $stmt->execute([$id]);
+}

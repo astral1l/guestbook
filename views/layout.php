@@ -10,6 +10,12 @@
 <main class="page">
     <header class="top">
         <a class="brand" href="/">Guestbook</a>
+
+        <?php if (is_admin()): ?>
+            <nav>
+                <a href="/admin">Admin</a>
+            </nav>
+        <?php endif; ?>
     </header>
 
     <?php $flash = take_flash(); ?>
