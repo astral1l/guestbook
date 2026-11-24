@@ -46,7 +46,7 @@ function validate_message(array $input): array
 
     if ($data['name'] === '') {
         $errors['name'] = 'Enter your name.';
-    } elseif (strlen($data['name']) < 2 || strlen($data['name']) > 50) {
+    } elseif (mb_strlen($data['name']) < 2 || mb_strlen($data['name']) > 50) {
         $errors['name'] = 'Name must be 2 to 50 characters.';
     }
 
@@ -56,7 +56,7 @@ function validate_message(array $input): array
 
     if ($data['body'] === '') {
         $errors['body'] = 'Enter your message.';
-    } elseif (strlen($data['body']) < 3 || strlen($data['body']) > 1000) {
+    } elseif (mb_strlen($data['body']) < 3 || mb_strlen($data['body']) > 1000) {
         $errors['body'] = 'Message must be 3 to 1000 characters.';
     }
 
