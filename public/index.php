@@ -11,7 +11,7 @@ if (PHP_SAPI === 'cli-server') {
 require dirname(__DIR__) . '/src/bootstrap.php';
 
 route('GET', '/', function () {
-    $page = (int) ($_GET['page'] ?? 1);
+    $page = page_number($_GET['page'] ?? 1);
     $pages = page_count(count_messages());
     $page = min($page, $pages);
 

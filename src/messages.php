@@ -12,6 +12,13 @@ function page_count(int $total): int
     return max(1, (int) ceil($total / MESSAGES_PER_PAGE));
 }
 
+function page_number($value): int
+{
+    $page = filter_var($value, FILTER_VALIDATE_INT);
+
+    return $page !== false && $page > 0 ? $page : 1;
+}
+
 function page_offset(int $page): int
 {
     return ($page - 1) * MESSAGES_PER_PAGE;
