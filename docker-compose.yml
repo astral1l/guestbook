@@ -1,0 +1,13 @@
+services:
+  app:
+    image: php:8.3-cli
+    ports:
+      - "8080:8080"
+    volumes:
+      - .:/app
+      - storage:/app/storage
+    working_dir: /app
+    command: sh -c "test -f config.php || cp config.example.php config.php; php bin/init-db.php; php -S 0.0.0.0:8080 -t public public/index.php"
+
+volumes:
+  storage:
