@@ -196,3 +196,8 @@ button.delete {
 .login {
     max-width: 360px;
 }
+
+.hp {
+    position: absolute;
+    left: -9999px;
+}

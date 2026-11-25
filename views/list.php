@@ -13,6 +13,7 @@
 
                 <?php if (!empty($admin)): ?>
                     <form method="post" action="/admin/messages/<?= (int) $message['id'] ?>/delete" class="delete-form">
+                        <input type="hidden" name="csrf" value="<?= e(csrf_token()) ?>">
                         <button type="submit" class="delete">Delete</button>
                     </form>
                 <?php endif; ?>

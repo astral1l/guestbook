@@ -26,7 +26,19 @@ route('GET', '/', function () {
 });
 
 route('POST', '/messages', function () {
+    csrf_check();
+
+    // The field is hidden, so only bots fill it in. Pretend it worked.
+    if (($_POST['website'] ?? '') !== '') {
+        flash('Thanks, your message has been added.');
+        redirect('/');
+    }
+
     [$data, $errors] = validate_message($_POST);
+
+    if (time() - (int) ($_SESSION['last_message_at'] ?? 0) < 30) {
+        $errors['form'] = 'Please wait 30 seconds before sending another message.';
+    }
 
     if ($errors) {
         render('home', [
@@ -42,6 +54,7 @@ route('POST', '/messages', function () {
     }
 
     create_message($data);
+    $_SESSION['last_message_at'] = time();
     flash('Thanks, your message has been added.');
     redirect('/');
 });
@@ -71,6 +84,8 @@ route('GET', '/admin', function () {
 });
 
 route('POST', '/admin/login', function () {
+    csrf_check();
+
     $login = trim(is_string($_POST['login'] ?? null) ? $_POST['login'] : '');
     $password = is_string($_POST['password'] ?? null) ? $_POST['password'] : '';
 
@@ -92,6 +107,7 @@ route('GET', '/admin/logout', function () {
 
 route('POST', '/admin/messages/{id}/delete', function (array $params) {
     require_admin();
+    csrf_check();
 
     delete_message((int) $params['id']);
 
