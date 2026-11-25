@@ -67,6 +67,12 @@ test('email is optional but must be valid', function () {
     assert_same('Enter a valid email address.', $errors['email'] ?? null);
 });
 
+test('email is trimmed', function () {
+    [$data, $errors] = validate_message(['name' => 'John', 'email' => ' john@example.com ', 'body' => 'Hello']);
+    assert_same([], $errors);
+    assert_same('john@example.com', $data['email']);
+});
+
 test('message must be 3 to 1000 characters', function () {
     [, $errors] = validate_message(['name' => 'John', 'body' => 'Hi']);
     assert_same('Message must be 3 to 1000 characters.', $errors['body'] ?? null);

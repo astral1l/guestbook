@@ -38,7 +38,7 @@ function validate_message(array $input): array
 {
     $data = [
         'name' => trim(is_string($input['name'] ?? null) ? $input['name'] : ''),
-        'email' => is_string($input['email'] ?? null) ? $input['email'] : '',
+        'email' => trim(is_string($input['email'] ?? null) ? $input['email'] : ''),
         'body' => trim(is_string($input['body'] ?? null) ? $input['body'] : ''),
     ];
 
