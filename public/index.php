@@ -1,9 +1,10 @@
 <?php
 
 if (PHP_SAPI === 'cli-server') {
-    $file = __DIR__ . parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+    $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH) ?: '/';
+    $file = __DIR__ . $path;
 
-    if (is_file($file)) {
+    if ($path !== '/' && is_file($file) && pathinfo($file, PATHINFO_EXTENSION) !== 'php') {
         return false;
     }
 }
@@ -117,5 +118,9 @@ route('POST', '/admin/messages/{id}/delete', function (array $params) {
 
 $method = $_SERVER['REQUEST_METHOD'];
 $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH) ?: '/';
+
+if ($path === '/index.php') {
+    redirect('/');
+}
 
 dispatch($method, $path);
