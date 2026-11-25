@@ -3,6 +3,9 @@
     --muted: #667085;
     --line: #d0d5dd;
     --accent: #2563eb;
+    --accent-dark: #1d4ed8;
+    --ok: #067647;
+    --ok-bg: #ecfdf3;
     --error: #b42318;
 }
 
@@ -70,6 +73,12 @@ h2 {
 .flash.error {
     border-color: var(--error);
     color: var(--error);
+}
+
+.flash.success {
+    border-color: #abefc6;
+    background: var(--ok-bg);
+    color: var(--ok);
 }
 
 .messages {
@@ -200,4 +209,36 @@ button.delete {
 .hp {
     position: absolute;
     left: -9999px;
+}
+
+.field input:focus,
+.field textarea:focus {
+    border-color: var(--accent);
+    outline: 2px solid rgba(37, 99, 235, 0.2);
+    outline-offset: 1px;
+}
+
+button:hover {
+    background: var(--accent-dark);
+}
+
+button.delete:hover {
+    border-color: var(--error);
+    background: transparent;
+}
+
+@media (max-width: 520px) {
+    .page {
+        padding: 24px 16px 48px;
+    }
+
+    .meta {
+        flex-direction: column;
+        gap: 2px;
+    }
+
+    .admin-head {
+        flex-direction: column;
+        gap: 8px;
+    }
 }
